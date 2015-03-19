@@ -1,0 +1,24 @@
+{
+	"name": "funnylookinhat/affirm-php",
+	"description": "Affirm PHP Library",
+	"homepage": "http://github.com/funnylookinhat/affirm-php",
+	"license": "MIT",
+	"keywords": ["affirm", "api", "library"],
+	"version": "0.2.0.0",
+	"authors": [
+		{
+			"name": "David Overcash",
+			"email": "funnylookinhat@gmail.com"
+		}
+	],
+	"require": {
+		"nategood/httpful": "*"
+	},
+	"require-dev": {
+	},
+	"autoload": {
+        "psr-0": {
+            "Affirm": "src/"
+        }
+    }
+}
