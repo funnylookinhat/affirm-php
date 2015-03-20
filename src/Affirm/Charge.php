@@ -42,7 +42,7 @@ class Charge extends Resource {
 		if( ! isset($data['id']) )
 			throw new AffirmException("Missing transaction id.");
 
-		return self::_sendPost(self::$_endpoint.'/'.$data['id'].'/capture');
+		return self::_sendPost(self::$_endpoint.'/'.$data['id'].'/capture', $data);
 	}
 
 	/**
@@ -55,7 +55,7 @@ class Charge extends Resource {
 		if( ! isset($data['id']) )
 			throw new AffirmException("Missing transaction id.");
 
-		return self::_sendPost(self::$_endpoint.'/'.$data['id'].'/void');
+		return self::_sendPost(self::$_endpoint.'/'.$data['id'].'/void', $data);
 	}
 
 	/**
@@ -69,7 +69,7 @@ class Charge extends Resource {
 		if( ! isset($data['id']) )
 			throw new AffirmException("Missing transaction id.");
 
-		return self::_sendPost(self::$_endpoint.'/'.$data['id'].'/refund');
+		return self::_sendPost(self::$_endpoint.'/'.$data['id'].'/refund', $data);
 	}
 
 	/**
@@ -85,7 +85,7 @@ class Charge extends Resource {
 		if( ! isset($data['id']) )
 			throw new AffirmException("Missing transaction id.");
 
-		return self::_sendPost(self::$_endpoint.'/'.$data['id'].'/update');
+		return self::_sendPost(self::$_endpoint.'/'.$data['id'].'/update', $data);
 	}
 
 }
