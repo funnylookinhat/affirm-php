@@ -15,7 +15,7 @@ class Resource {
 
 	protected static $_baseUrl = "https://api.affirm.com/api/v2";
 
-	public static function init($publicKey, $privateKey, $productKey, $baseUrl = NULL)
+	public static function Init($publicKey, $privateKey, $productKey, $baseUrl = NULL)
 	{
 		if( self::$_initialized )
 			throw new AffirmException("Cannot be initialized twice.");
@@ -36,7 +36,7 @@ class Resource {
 	protected static function _sendGet($endpoint)
 	{
 		$response = FALSE;
-		
+
 		if( ! self::$_initialized )
 			throw new AffirmException("Not initialized.");
 		
