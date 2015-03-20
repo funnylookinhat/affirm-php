@@ -25,6 +25,10 @@ class Resource {
 
 		if( substr(self::$_baseUrl, -1) == "/" )
 			self::$_baseUrl = substr(self::$_baseUrl, 0, -1);
+
+		self::$_publicKey = $publicKey;
+		self::$_privateKey = $privateKey;
+		self::$_productKey = $productKey;
 	}
 
 	protected static function _sendGet($endpoint)
@@ -35,8 +39,9 @@ class Resource {
 			->expectsJson()
 			->send();
 
-		if( isset($response->body->error) )
-			throw new AffirmRequestException($response->body->error->message);
+		if( isset($response->body->status_code) &&
+			in_array(substr($response->body->status_code,0,1), array('4','5')) )
+			throw new AffirmRequestException($response->body->message);
 
 		return $response->body;
 	}
@@ -50,8 +55,9 @@ class Resource {
 			->body(json_encode($data))
 			->send();
 
-		if( isset($response->body->error) )
-			throw new AffirmRequestException($response->body->error->message);
+		if( isset($response->body->status_code) &&
+			in_array(substr($response->body->status_code,0,1), array('4','5')) )
+			throw new AffirmRequestException($response->body->message);
 
 		return $response->body;
 	}

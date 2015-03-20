@@ -4,7 +4,7 @@ namespace Affirm;
 
 class Charge extends Resource {
 
-	private static $_endpoint = "/charges";
+	private static $_endpoint = "charges";
 
 	/**
 	 * Fetch a charge.
