@@ -6,6 +6,11 @@ class Charge extends Resource {
 
 	private static $_endpoint = "charges";
 
+	public static function _init()
+	{
+		self::$_initialized = TRUE;
+	}
+
 	/**
 	 * Fetch a charge.
 	 * @param Array $data Request object with the following:

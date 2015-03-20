@@ -4,7 +4,6 @@
 	"homepage": "http://github.com/funnylookinhat/affirm-php",
 	"license": "MIT",
 	"keywords": ["affirm", "api", "library"],
-	"version": "0.2.0.4",
 	"authors": [
 		{
 			"name": "David Overcash",

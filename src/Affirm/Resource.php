@@ -7,7 +7,7 @@ class AffirmRequestException extends \Exception {}
 
 class Resource {
 	
-	private static $_initialized = FALSE;
+	protected static $_initialized = FALSE;
 
 	private static $_publicKey,
 				   $_privateKey,
@@ -29,18 +29,31 @@ class Resource {
 		self::$_publicKey = $publicKey;
 		self::$_privateKey = $privateKey;
 		self::$_productKey = $productKey;
+
+		Charge::_init();
 	}
 
 	protected static function _sendGet($endpoint)
 	{
+		$response = FALSE;
+		
 		if( ! self::$_initialized )
 			throw new AffirmException("Not initialized.");
 		
-		$response = \Httpful\Request::get(self::$_baseUrl.'/'.$endpoint)
-			->authenticateWith(self::$_publicKey, self::$_privateKey)
-			->sendsJson()
-			->expectsJson()
-			->send();
+		$response = FALSE;
+
+		try
+		{
+			$response = \Httpful\Request::get(self::$_baseUrl.'/'.$endpoint)
+				->authenticateWith(self::$_publicKey, self::$_privateKey)
+				->sendsJson()
+				->expectsJson()
+				->send();
+		}
+		catch( \Exception $e )
+		{
+			throw new AffirmRequestException("An unexpected error occurred with the request: ".$e->getMessage());
+		}
 
 		if( isset($response->body->status_code) &&
 			in_array(substr($response->body->status_code,0,1), array('4','5')) )
@@ -54,12 +67,21 @@ class Resource {
 		if( ! self::$_initialized )
 			throw new AffirmException("Not initialized.");
 		
-		$response = \Httpful\Request::post(self::$_baseUrl.'/'.$endpoint)
-			->authenticateWith(self::$_publicKey, self::$_privateKey)
-			->sendsJson()
-			->expectsJson()
-			->body(json_encode($data))
-			->send();
+		$response = FALSE;
+
+		try
+		{
+			$response = \Httpful\Request::post(self::$_baseUrl.'/'.$endpoint)
+				->authenticateWith(self::$_publicKey, self::$_privateKey)
+				->sendsJson()
+				->expectsJson()
+				->body(json_encode($data))
+				->send();
+		}
+		catch( \Exception $e )
+		{
+			throw new AffirmRequestException("An unexpected error occurred with the request: ".$e->getMessage());
+		}
 
 		if( isset($response->body->status_code) &&
 			in_array(substr($response->body->status_code,0,1), array('4','5')) )
