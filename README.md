@@ -1,6 +1,8 @@
 # affirm-php
 Affirm PHP Library.
 
+Current Version: 2.0.0
+
 ## Installation
 
 You can install affirm-php through composer.  Note that the version you request 
