@@ -33,6 +33,9 @@ class Resource {
 
 	protected static function _sendGet($endpoint)
 	{
+		if( ! self::$_initialized )
+			throw new AffirmException("Not initialized.");
+		
 		$response = \Httpful\Request::get(self::$_baseUrl.'/'.$endpoint)
 			->authenticateWith(self::$_publicKey, self::$_privateKey)
 			->sendsJson()
@@ -48,6 +51,9 @@ class Resource {
 
 	protected static function _sendPost($endpoint, $data)
 	{
+		if( ! self::$_initialized )
+			throw new AffirmException("Not initialized.");
+		
 		$response = \Httpful\Request::post(self::$_baseUrl.'/'.$endpoint)
 			->authenticateWith(self::$_publicKey, self::$_privateKey)
 			->sendsJson()
