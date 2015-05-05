@@ -8,7 +8,7 @@ class Charge extends Resource {
 
 	public static function _init()
 	{
-		self::$_initialized = TRUE;
+
 	}
 
 	/**

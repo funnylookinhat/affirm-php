@@ -15,6 +15,11 @@ class Resource {
 
 	protected static $_baseUrl = "https://api.affirm.com/api/v2";
 
+	public static function IsInit()
+	{
+		return self::$_initialized ? TRUE : FALSE;
+	}
+
 	public static function Init($publicKey, $privateKey, $productKey, $baseUrl = NULL)
 	{
 		if( self::$_initialized )
@@ -29,6 +34,8 @@ class Resource {
 		self::$_publicKey = $publicKey;
 		self::$_privateKey = $privateKey;
 		self::$_productKey = $productKey;
+
+		self::$_initialized = TRUE;
 
 		Charge::_init();
 	}
